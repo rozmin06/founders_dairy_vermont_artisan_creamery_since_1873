@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Dynamic Title & Meta Description updated automatically on route/tab change -->
+    <title>Founders' Dairy | Vermont Artisan Creamery &amp; Cheeses Since 1873</title>
+    <meta name="description" id="meta-description" content="Discover Founders' Dairy, crafting award-winning Vermont smoked cheddars, aged cheeses, pure maple syrup, and artisanal jams since 1873. Shipped nationwide.">
+    
+    <!-- Google Fonts: Fraunces / Playfair Display for Heritage Editorial Serif, Inter for Clean UI -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        forest: {
+                            950: '#0F221A',
+                            900: '#163025',
+                            800: '#1E4032',
+                            700: '#2A5745',
+                            100: '#E5EFEA'
+                        },
+                        parchment: {
+                            50: '#FDFBF7',
+                            100: '#F7F3EA',
+                            200: '#EDE5D5',
+                            300: '#DFD2BA'
+                        },
+                        cheddar: {
+                            400: '#E2A642',
+                            500: '#C88424',
+                            600: '#A66816',
+                            700: '#824F0E'
+                        },
+                        charcoal: '#232220'
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'Georgia', 'serif'],
+                        sans: ['"Inter"', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-parchment-50 text-charcoal font-sans antialiased selection:bg-cheddar-500 selection:text-white flex flex-col min-h-screen">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-forest-950 text-parchment-100 text-xs sm:text-sm py-2.5 px-4 text-center tracking-wide border-b border-forest-800">
+        <span class="text-cheddar-400 font-semibold uppercase tracking-widest mr-2">Est. 1873 • Vermont</span>
+        <span class="hidden sm:inline">Cold-pack insulated shipping nationwide — </span>
+        <span>Free shipping on orders over $75</span>
+    </div>
+
+    <!-- Main Navigation Header -->
+    <header class="sticky top-0 z-40 bg-parchment-50/95 backdrop-blur-md border-b border-parchment-200 transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Brand Logo -->
+                <button onclick="navigateTo('home')" class="flex items-center gap-3 text-left group focus:outline-none">
+                    <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-forest-900 flex items-center justify-center text-cheddar-400 border border-cheddar-500/40 shadow-sm group-hover:scale-105 transition-transform">
+                        <!-- Inline SVG Heritage Emblem -->
+                        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                            <path d="M3 17l6-10 4 6 3-4 5 8H3z" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="16.5" cy="5.5" r="1.5" fill="currentColor" stroke="none"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="font-serif text-xl sm:text-2xl font-bold tracking-tight text-forest-900 block leading-none">Founders' Dairy</span>
+                        <span class="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-cheddar-700 font-semibold mt-0.5 block">Vermont Creamery • 1873</span>
+                    </div>
+                </button>
+
+                <!-- Desktop Navigation Tabs -->
+                <nav class="hidden md:flex items-center space-x-2 bg-parchment-100 p-1.5 rounded-full border border-parchment-200" aria-label="Primary Navigation">
+                    <button id="nav-home" onclick="navigateTo('home')" class="nav-tab px-5 py-2 rounded-full text-sm font-medium transition-all">
+                        Heritage &amp; Home
+                    </button>
+                    <button id="nav-cheeses" onclick="navigateTo('cheeses')" class="nav-tab px-5 py-2 rounded-full text-sm font-medium transition-all">
+                        Shop Cheeses
+                    </button>
+                    <button id="nav-recipes" onclick="navigateTo('recipes')" class="nav-tab px-5 py-2 rounded-full text-sm font-medium transition-all">
+                        Vermont Recipes
+                    </button>
+                </nav>
+
+                <!-- Right Actions: Cart -->
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <!-- Shopping Bag Button -->
+                    <button onclick="toggleCart(true)" class="relative inline-flex items-center gap-2 bg-forest-900 hover:bg-forest-800 text-parchment-50 px-4 py-2.5 rounded-full text-sm font-medium shadow-sm transition-all active:scale-95">
+                        <svg class="w-4 h-4 text-cheddar-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                        </svg>
+                        <span class="hidden sm:inline">Basket</span>
+                        <span id="cart-badge" class="bg-cheddar-500 text-forest-950 font-bold text-xs w-5 h-5 rounded-full flex items-center justify-center">0</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation Sub-bar -->
+            <div class="flex md:hidden items-center justify-between pb-3 pt-1 gap-1.5 overflow-x-auto">
+                <button id="m-nav-home" onclick="navigateTo('home')" class="m-nav-tab flex-1 py-2 px-3 rounded-xl text-xs font-semibold text-center transition-all">
+                    Home
+                </button>
+                <button id="m-nav-cheeses" onclick="navigateTo('cheeses')" class="m-nav-tab flex-1 py-2 px-3 rounded-xl text-xs font-semibold text-center transition-all">
+                    Cheeses
+                </button>
+                <button id="m-nav-recipes" onclick="navigateTo('recipes')" class="m-nav-tab flex-1 py-2 px-3 rounded-xl text-xs font-semibold text-center transition-all">
+                    Recipes
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="flex-grow">
+
+        <!-- ========================================================= -->
+        <!-- VIEW 1: HOME / OVERVIEW                                   -->
+        <!-- ========================================================= -->
+        <section id="view-home" class="page-view">
+            <!-- Hero Section -->
+            <div class="relative bg-forest-900 text-parchment-50 overflow-hidden">
+                <!-- Subtle SVG Grain/Pattern Overlay -->
+                <div class="absolute inset-0 opacity-10 pointer-events-none">
+                    <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <pattern id="heritage-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#E2A642" stroke-width="0.75"/>
+                            </pattern>
+                        </defs>
+                        <rect width="100%" height="100%" fill="url(#heritage-grid)"/>
+                    </svg>
+                </div>
+
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-28 relative z-10">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                        <div class="lg:col-span-7 space-y-6">
+                            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-forest-800/90 border border-cheddar-400/30 text-cheddar-400 text-xs font-semibold tracking-wider uppercase">
+                                <span>Green Mountains, Vermont • Since 1873</span>
+                            </div>
+                            <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.12] tracking-tight text-parchment-50">
+                                Hickory-Smoked Tradition, Aged in the Heart of Vermont.
+                            </h1>
+                            <p class="text-base sm:text-lg text-parchment-200 max-w-2xl leading-relaxed font-light">
+                                For over 150 years, Founders' Dairy has partnered with family-run pasture farms to craft small-batch smoked cheddars, cave-aged wheels, pure wood-fired maple syrup, and orchard jams—shipped fresh from our cellar to your table nationwide.
+                            </p>
+                            <div class="pt-2 flex flex-wrap items-center gap-4">
+                                <button onclick="navigateTo('cheeses')" class="px-7 py-3.5 rounded-full bg-cheddar-500 hover:bg-cheddar-400 text-forest-950 font-semibold text-sm sm:text-base shadow-lg shadow-black/20 transition-all transform hover:-translate-y-0.5">
+                                    Buy Cheese Online
+                                </button>
+                                <button onclick="navigateTo('recipes')" class="px-7 py-3.5 rounded-full bg-forest-800 hover:bg-forest-700 text-parchment-50 border border-parchment-200/25 font-medium text-sm sm:text-base transition-all">
+                                    Explore Vermont Recipes
+                                </button>
+                            </div>
+                            <!-- Trust Pillars -->
+                            <div class="pt-6 grid grid-cols-3 gap-4 border-t border-forest-800 max-w-lg">
+                                <div>
+                                    <p class="font-serif text-2xl sm:text-3xl font-bold text-cheddar-400">1873</p>
+                                    <p class="text-xs text-parchment-200 mt-0.5">Vermont Heritage</p>
+                                </div>
+                                <div>
+                                    <p class="font-serif text-2xl sm:text-3xl font-bold text-cheddar-400">100%</p>
+                                    <p class="text-xs text-parchment-200 mt-0.5">Pasture-Raised Milk</p>
+                                </div>
+                                <div>
+                                    <p class="font-serif text-2xl sm:text-3xl font-bold text-cheddar-400">50 States</p>
+                                    <p class="text-xs text-parchment-200 mt-0.5">Chilled Nationwide</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Editorial Hero Visual Card -->
+                        <div class="lg:col-span-5">
+                            <div class="relative rounded-3xl overflow-hidden bg-forest-800 border border-parchment-200/15 shadow-2xl p-6 sm:p-8">
+                                <div class="aspect-[4/3] rounded-2xl overflow-hidden mb-6 bg-forest-950 relative">
+                                    <img src="https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?auto=format&fit=crop&w=900&q=80" 
+                                         alt="Artisan Vermont Smoked Cheddar Wheel and Aged Cheeses" 
+                                         onerror="this.src='https://placehold.co/800x600/163025/E2A642?text=Founders%27+Dairy+Smoked+Cheddar'"
+                                         class="w-full h-full object-cover">
+                                    <div class="absolute top-3 left-3 bg-forest-950/90 backdrop-blur-sm text-cheddar-400 text-xs font-semibold px-3 py-1 rounded-full border border-cheddar-400/30">
+                                        Cellar Flagship
+                                    </div>
+                                </div>
+                                <div class="flex items-start justify-between gap-4">
+                                    <div>
+                                        <span class="text-xs uppercase tracking-widest text-cheddar-400 font-semibold">Signature Reserve</span>
+                                        <h2 class="font-serif text-2xl font-bold text-parchment-50 mt-1">1873 Hickory Smoked Cheddar</h2>
+                                        <p class="text-sm text-parchment-200 mt-1.5">Cold-smoked over Vermont applewood &amp; hickory embers for 18 hours.</p>
+                                    </div>
+                                    <span class="font-serif text-xl font-bold text-cheddar-400 shrink-0">$16.50</span>
+                                </div>
+                                <div class="mt-6 pt-5 border-t border-forest-700 flex items-center justify-between">
+                                    <span class="text-xs text-parchment-200">8 oz wax-sealed block</span>
+                                    <button onclick="addToCart('smoked-cheddar'); toggleCart(true);" class="px-4 py-2 rounded-full bg-parchment-50 hover:bg-cheddar-400 text-forest-950 font-semibold text-xs transition-colors">
+                                        + Add to Basket
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Pantry & Creamery Highlights -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-[0.2em] text-cheddar-700">From Cellar &amp; Sugarhouse</span>
+                        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-forest-950 mt-2">Vermont Creamery &amp; Pantry Staples</h2>
+                    </div>
+                    <button onclick="navigateTo('cheeses')" class="text-sm font-semibold text-forest-900 hover:text-cheddar-700 inline-flex items-center gap-1.5 transition-colors">
+                        <span>Browse Full Cheese &amp; Pantry Catalog</span>
+                        <span>&rarr;</span>
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Pillar 1: Smoked Cheddars -->
+                    <div class="bg-white rounded-3xl p-6 sm:p-7 border border-parchment-200 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+                        <div>
+                            <div class="h-48 rounded-2xl overflow-hidden mb-5 bg-parchment-100">
+                                <img src="https://images.unsplash.com/photo-1552767059-ce182ead6c1b?auto=format&fit=crop&w=800&q=80" 
+                                     alt="Aged Vermont Cheddar Wedges"
+                                     onerror="this.src='https://placehold.co/600x400/EDE5D5/163025?text=Smoked+Cheddars'"
+                                     class="w-full h-full object-cover">
+                            </div>
+                            <span class="text-xs font-semibold uppercase tracking-wider text-cheddar-700">Creamery Classics</span>
+                            <h3 class="font-serif text-2xl font-bold text-forest-950 mt-1">Famous Smoked Cheddars</h3>
+                            <p class="text-sm text-charcoal/80 mt-2 leading-relaxed">
+                                Sharp, crystalline 2-year aged cheddar naturally cold-smoked over local hardwoods for a rich, savory finish without artificial flavorings.
+                            </p>
+                        </div>
+                        <button onclick="navigateTo('cheeses', 'cheddar')" class="mt-6 w-full py-2.5 rounded-xl bg-parchment-100 hover:bg-forest-900 hover:text-parchment-50 text-forest-900 font-semibold text-sm transition-colors">
+                            Shop Smoked &amp; Aged Cheddars
+                        </button>
+                    </div>
+
+                    <!-- Pillar 2: Maple Syrup & Jams -->
+                    <div class="bg-white rounded-3xl p-6 sm:p-7 border border-parchment-200 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+                        <div>
+                            <div class="h-48 rounded-2xl overflow-hidden mb-5 bg-parchment-100">
+                                <img src="https://images.unsplash.com/photo-1589733955941-5eeaf752f6dd?auto=format&fit=crop&w=800&q=80" 
+                                     alt="Pure Vermont Amber Maple Syrup and Fruit Jam"
+                                     onerror="this.src='https://placehold.co/600x400/EDE5D5/163025?text=Maple+Syrup+%26+Jams'"
+                                     class="w-full h-full object-cover">
+                            </div>
+                            <span class="text-xs font-semibold uppercase tracking-wider text-cheddar-700">Board Companions</span>
+                            <h3 class="font-serif text-2xl font-bold text-forest-950 mt-1">Pure Maple Syrup &amp; Jams</h3>
+                            <p class="text-sm text-charcoal/80 mt-2 leading-relaxed">
+                                Single-woods Amber Rich Vermont maple syrup and small-batch heirloom raspberry &amp; spiced apple jams crafted specifically to pair with sharp cheeses.
+                            </p>
+                        </div>
+                        <button onclick="navigateTo('cheeses', 'pantry')" class="mt-6 w-full py-2.5 rounded-xl bg-parchment-100 hover:bg-forest-900 hover:text-parchment-50 text-forest-900 font-semibold text-sm transition-colors">
+                            Shop Maple Syrup &amp; Jams
+                        </button>
+                    </div>
+
+                    <!-- Pillar 3: Cook with Vermont Flavors -->
+                    <div class="bg-forest-900 text-parchment-50 rounded-3xl p-6 sm:p-7 border border-forest-800 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+                        <div>
+                            <div class="h-48 rounded-2xl overflow-hidden mb-5 bg-forest-950">
+                                <img src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=800&q=80" 
+                                     alt="Smoked Cheddar and Apple Grilled Cheese Sandwich"
+                                     onerror="this.src='https://placehold.co/600x400/0F221A/E2A642?text=Vermont+Recipes'"
+                                     class="w-full h-full object-cover">
+                            </div>
+                            <span class="text-xs font-semibold uppercase tracking-wider text-cheddar-400">Creamery Kitchen</span>
+                            <h3 class="font-serif text-2xl font-bold text-parchment-50 mt-1">Recipes &amp; Pairings</h3>
+                            <p class="text-sm text-parchment-200 mt-2 leading-relaxed">
+                                Bring Green Mountain comfort to your kitchen with easy grilled cheeses, maple-glazed baked brie crostini, and one-click ingredient shopping.
+                            </p>
+                        </div>
+                        <button onclick="navigateTo('recipes')" class="mt-6 w-full py-2.5 rounded-xl bg-cheddar-500 hover:bg-cheddar-400 text-forest-950 font-semibold text-sm transition-colors">
+                            Browse Recipes &amp; Shop Ingredients
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- VIEW 2: CHEESES PAGE (E-COMMERCE CATALOG)                 -->
+        <!-- SEO Title: Buy Cheese Online | Smoked Cheddar & More | Founders' Dairy -->
+        <!-- ========================================================= -->
+        <section id="view-cheeses" class="page-view hidden">
+            <!-- Page Header -->
+            <div class="bg-parchment-100 border-b border-parchment-200 py-12 sm:py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="max-w-3xl">
+                        <nav class="text-xs text-forest-700 font-medium mb-3 flex items-center gap-2">
+                            <button onclick="navigateTo('home')" class="hover:underline">Home</button>
+                            <span>/</span>
+                            <span class="text-forest-950 font-semibold">Cheeses &amp; Creamery Shop</span>
+                        </nav>
+                        <h1 class="font-serif text-3xl sm:text-5xl font-bold text-forest-950 tracking-tight">
+                            Buy Artisan Vermont Cheese Online
+                        </h1>
+                        <p class="text-base sm:text-lg text-charcoal/80 mt-4 leading-relaxed">
+                            Order small-batch artisan cheeses online from Founders' Dairy, a Vermont favorite since 1873. Shop our famous hickory-smoked cheddars, cave-aged wheels, pure maple syrup, and orchard jams—cold-packed and shipped nationwide.
+                        </p>
+                    </div>
+
+                    <!-- Category Filter Pills -->
+                    <div class="mt-8 flex flex-wrap items-center gap-2.5">
+                        <button onclick="filterProducts('all')" data-filter="all" class="filter-btn active px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-forest-900 text-parchment-50">
+                            All Creamery &amp; Pantry (8)
+                        </button>
+                        <button onclick="filterProducts('cheddar')" data-filter="cheddar" class="filter-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-white text-forest-900 border border-parchment-300 hover:border-forest-900">
+                            Smoked &amp; Aged Cheddars
+                        </button>
+                        <button onclick="filterProducts('specialty')" data-filter="specialty" class="filter-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-white text-forest-900 border border-parchment-300 hover:border-forest-900">
+                            Alpine, Gouda &amp; Brie
+                        </button>
+                        <button onclick="filterProducts('pantry')" data-filter="pantry" class="filter-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-white text-forest-900 border border-parchment-300 hover:border-forest-900">
+                            Maple Syrup &amp; Jams
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Grid -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+                <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+                    <!-- Products injected dynamically via JS -->
+                </div>
+
+                <!-- Nationwide Cold-Pack Guarantee Banner -->
+                <div class="mt-16 rounded-3xl bg-forest-900 text-parchment-50 p-8 sm:p-10 flex flex-col lg:flex-row items-center justify-between gap-8 border border-forest-800">
+                    <div class="space-y-2 max-w-2xl">
+                        <span class="text-xs font-bold uppercase tracking-widest text-cheddar-400">Cellar-to-Doorstep Freshness</span>
+                        <h2 class="font-serif text-2xl sm:text-3xl font-bold">Shipped Nationwide in Recyclable Thermal Insulation</h2>
+                        <p class="text-sm text-parchment-200 leading-relaxed">
+                            Every online order from our Vermont creamery is hand-cut to order, sealed in breathable cheese paper or traditional wax, and shipped with reusable ice packs so your smoked cheddar arrives cellar-fresh anywhere in the U.S.
+                        </p>
+                    </div>
+                    <div class="shrink-0 flex items-center gap-3 bg-forest-950/60 px-5 py-4 rounded-2xl border border-cheddar-400/25">
+                        <div class="w-10 h-10 rounded-full bg-cheddar-500/20 text-cheddar-400 flex items-center justify-center font-serif font-bold text-lg">✓</div>
+                        <div class="text-xs">
+                            <p class="font-bold text-parchment-50 text-sm">100% Creamery Guarantee</p>
+                            <p class="text-parchment-200">Arrives chilled &amp; ready for the board</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- VIEW 3: RECIPES PAGE                                      -->
+        <!-- SEO Title: Recipes with Cheese, Maple Syrup & More | Founders' Dairy -->
+        <!-- ========================================================= -->
+        <section id="view-recipes" class="page-view hidden">
+            <!-- Page Header -->
+            <div class="bg-parchment-100 border-b border-parchment-200 py-12 sm:py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="max-w-3xl">
+                        <nav class="text-xs text-forest-700 font-medium mb-3 flex items-center gap-2">
+                            <button onclick="navigateTo('home')" class="hover:underline">Home</button>
+                            <span>/</span>
+                            <span class="text-forest-950 font-semibold">Recipes</span>
+                        </nav>
+                        <h1 class="font-serif text-3xl sm:text-5xl font-bold text-forest-950 tracking-tight">
+                            Recipes with Cheese, Maple Syrup &amp; More
+                        </h1>
+                        <p class="text-base sm:text-lg text-charcoal/80 mt-4 leading-relaxed">
+                            Find easy, comforting recipes made with Founders' Dairy smoked cheddars, pure Vermont maple syrup, orchard jams, and more. Get inspired to cook with authentic Vermont flavors—then shop the exact ingredients in one click.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Curated Recipes Grid -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+                <div id="recipes-grid" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Recipes injected dynamically via JS -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ========================================================= -->
+    <!-- FOOTER                                                    -->
+    <!-- ========================================================= -->
+    <footer class="bg-forest-950 text-parchment-200 border-t border-forest-800 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-10 border-b border-forest-800">
+                <div class="md:col-span-2 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-forest-900 border border-cheddar-400/40 flex items-center justify-center text-cheddar-400 font-serif font-bold">F</div>
+                        <span class="font-serif text-2xl font-bold text-parchment-50">Founders' Dairy</span>
+                    </div>
+                    <p class="text-sm text-parchment-200/80 max-w-md leading-relaxed">
+                        Crafting small-batch smoked cheddars, cave-aged wheels, pure Vermont maple syrup, and fruit jams in the Green Mountains since 1873. Shipped cold-packed nationwide.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="font-serif text-base font-bold text-parchment-50 mb-4">Creamery &amp; Kitchen</h3>
+                    <ul class="space-y-2.5 text-sm">
+                        <li><button onclick="navigateTo('home')" class="hover:text-cheddar-400 transition-colors">Our 1873 Heritage</button></li>
+                        <li><button onclick="navigateTo('cheeses')" class="hover:text-cheddar-400 transition-colors">Buy Cheese Online</button></li>
+                        <li><button onclick="navigateTo('cheeses', 'pantry')" class="hover:text-cheddar-400 transition-colors">Maple Syrup &amp; Jams</button></li>
+                        <li><button onclick="navigateTo('recipes')" class="hover:text-cheddar-400 transition-colors">Vermont Recipes</button></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="font-serif text-base font-bold text-parchment-50 mb-4">Creamery Cellar</h3>
+                    <p class="text-sm text-parchment-200/80 leading-relaxed">
+                        1873 Creamery Hill Road<br>
+                        Middlebury, VT 05753<br>
+                        <span class="text-cheddar-400 mt-2 inline-block">Nationwide Chilled Delivery</span>
+                    </p>
+                </div>
+            </div>
+            <div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-parchment-200/60 gap-4">
+                <p>&copy; 2026 Founders' Dairy Creamery Co. All rights reserved.</p>
+                <p>Crafted in Vermont • Shipped Nationwide</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========================================================= -->
+    <!-- SLIDE-OUT SHOPPING BASKET DRAWER                          -->
+    <!-- ========================================================= -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 hidden" aria-modal="true" role="dialog">
+        <div onclick="toggleCart(false)" class="fixed inset-0 bg-forest-950/60 backdrop-blur-xs transition-opacity"></div>
+        <div class="fixed inset-y-0 right-0 max-w-md w-full bg-parchment-50 shadow-2xl border-l border-parchment-200 flex flex-col z-10">
+            <!-- Drawer Header -->
+            <div class="px-6 py-5 bg-forest-900 text-parchment-50 flex items-center justify-between">
+                <div>
+                    <h2 class="font-serif text-xl font-bold">Your Creamery Basket</h2>
+                    <p class="text-xs text-parchment-200 mt-0.5">Cold-packed with thermal liners</p>
+                </div>
+                <button onclick="toggleCart(false)" class="p-2 rounded-full hover:bg-forest-800 text-parchment-200 hover:text-white transition-colors" aria-label="Close basket">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Free Shipping Progress Bar -->
+            <div class="px-6 py-3 bg-parchment-100 border-b border-parchment-200">
+                <p id="shipping-status-text" class="text-xs font-medium text-forest-900 mb-1.5">Add $75.00 for Free Nationwide Cold-Pack Shipping</p>
+                <div class="w-full h-2 bg-parchment-200 rounded-full overflow-hidden">
+                    <div id="shipping-progress-bar" class="h-full bg-cheddar-500 transition-all duration-300" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Cart Items List -->
+            <div id="cart-items-container" class="flex-1 overflow-y-auto p-6 space-y-4">
+                <!-- Items rendered via JS -->
+            </div>
+
+            <!-- Cart Footer -->
+            <div class="p-6 bg-white border-t border-parchment-200 space-y-4">
+                <div class="space-y-1.5 text-sm">
+                    <div class="flex justify-between text-charcoal/70">
+                        <span>Subtotal</span>
+                        <span id="cart-subtotal">$0.00</span>
+                    </div>
+                    <div class="flex justify-between text-charcoal/70">
+                        <span>Insulated Cold-Pack Shipping</span>
+                        <span id="cart-shipping">$9.95</span>
+                    </div>
+                    <div class="flex justify-between font-bold text-base text-forest-950 pt-2 border-t border-parchment-200">
+                        <span>Estimated Total</span>
+                        <span id="cart-total">$0.00</span>
+                    </div>
+                </div>
+                <button id="checkout-btn" onclick="handleCheckout()" class="w-full py-3.5 rounded-full bg-forest-900 hover:bg-forest-800 disabled:opacity-40 text-parchment-50 font-semibold text-sm shadow-md transition-all">
+                    Proceed to Nationwide Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- INTERACTIVE RECIPE MODAL                                  -->
+    <!-- ========================================================= -->
+    <div id="recipe-modal" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-modal="true" role="dialog">
+        <div onclick="closeRecipeModal()" class="fixed inset-0 bg-forest-950/70 backdrop-blur-xs"></div>
+        <div class="relative min-h-screen flex items-center justify-center p-4">
+            <div id="recipe-modal-content" class="relative bg-parchment-50 rounded-3xl max-w-3xl w-full overflow-hidden shadow-2xl border border-parchment-200 z-10">
+                <!-- Recipe details populated dynamically via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- TOAST NOTIFICATION BANNER                                 -->
+    <!-- ========================================================= -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 pointer-events-none flex flex-col gap-2 max-w-sm w-full px-4 sm:px-0"></div>
+
+    <!-- ========================================================= -->
+    <!-- APPLICATION LOGIC & DATA                                  -->
+    <!-- ========================================================= -->
+    <script>
+        // 1. SEO METADATA CONFIGURATION (Exact match to provided SEO recommendations)
+        const SEO_DATA = {
+            home: {
+                title: "Founders' Dairy | Vermont Artisan Creamery & Cheeses Since 1873",
+                description: "Discover Founders' Dairy, crafting award-winning Vermont smoked cheddars, aged cheeses, pure maple syrup, and artisanal jams since 1873. Shipped nationwide."
+            },
+            cheeses: {
+                title: "Buy Cheese Online | Smoked Cheddar & More | Founders' Dairy",
+                description: "Order artisan cheeses online from Founders' Dairy, a Vermont favorite since 1873. Shop our famous smoked cheddars and more, shipped nationwide."
+            },
+            recipes: {
+                title: "Recipes with Cheese, Maple Syrup & More | Founders' Dairy",
+                description: "Find easy recipes made with Founders' Dairy cheeses, maple syrup, jams, and more. Get inspired to cook with Vermont flavors, then shop the ingredients."
+            }
+        };
+
+        // 2. PRODUCT CATALOG DATA
+        const PRODUCTS = [
+            {
+                id: 'smoked-cheddar',
+                name: '1873 Hickory Smoked Cheddar',
+                category: 'cheddar',
+                categoryLabel: 'Smoked Cheddar',
+                weight: '8 oz Wax-Sealed Block',
+                price: 16.50,
+                badge: 'Best Seller',
+                description: 'Our signature sharp Vermont cheddar cold-smoked for 18 hours over local hickory and applewood embers.',
+                image: 'https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?auto=format&fit=crop&w=700&q=80'
+            },
+            {
+                id: 'sharp-cheddar',
+                name: '2-Year Cave-Aged Sharp Cheddar',
+                category: 'cheddar',
+                categoryLabel: 'Aged Cheddar',
+                weight: '8 oz Wedge',
+                price: 15.00,
+                badge: 'Award Winner',
+                description: 'Aged 24 months in our Middlebury limestone cellars for a bold, nutty bite and natural tyrosine crunch.',
+                image: 'https://images.unsplash.com/photo-1552767059-ce182ead6c1b?auto=format&fit=crop&w=700&q=80'
+            },
+            {
+                id: 'maple-gouda',
+                name: 'Maple-Infused Aged Gouda',
+                category: 'specialty',
+                categoryLabel: 'Specialty Wheel',
+                weight: '8 oz Wedge',
+                price: 17.50,
+                badge: 'Vermont Exclusive',
+                description: 'Creamy, butterscotch-noted Dutch-style gouda brushed with pure Vermont amber maple syrup during aging.',
+                image: 'https://images.unsplash.com/photo-1634487359989-3e90c9432133?auto=format&fit=crop&w=700&q=80'
+            },
+            {
+                id: 'reserve-alpine',
+                name: 'Green Mountain Reserve Alpine',
+                category: 'specialty',
+                categoryLabel: 'Alpine Style',
+                weight: '8 oz Wedge',
+                price: 18.00,
+                badge: 'Small Batch',
+                description: 'Inspired by Swiss mountain traditions, crafted from summer pasture milk with toasted hazelnut and brown butter notes.',
+                image: 'https://images.unsplash.com/photo-1624806992066-5ffcf7ca186b?auto=format&fit=crop&w=700&q=80'
+            },
+            {
+                id: 'triple-cream-brie',
+                name: 'Champlain Valley Triple-Cream Brie',
+                category: 'specialty',
+                categoryLabel: 'Soft-Ripened',
+                weight: '9 oz Wheel',
+                price: 19.00,
+                badge: 'Chef Favorite',
+                description: 'Velvety bloomy-rind wheel enriched with sweet Vermont cream—decadent baked with maple syrup and jam.',
+                image: 'https://images.unsplash.com/photo-1452195100486-9cc805987862?auto=format&fit=crop&w=700&q=80'
+            },
+            {
+                id: 'maple-syrup',
+                name: 'Wood-Fired Amber Maple Syrup',
+                category: 'pantry',
+                categoryLabel: 'Pure Maple Syrup',
+                weight: '12.7 fl oz Glass Flask',
+                price: 18.50,
+                badge: 'Single Sugarbush',
+                description: 'Grade A Amber Rich pure Vermont maple syrup boiled over split hardwood for delicate caramel and vanilla notes.',
+                image: 'https://images.unsplash.com/photo-1589733955941-5eeaf752f6dd?auto=format&fit=crop&w=700&q=80'
+            },
+            {
+                id: 'raspberry-jam',
+                name: 'Heirloom Red Raspberry Cheese Jam',
+                category: 'pantry',
+                categoryLabel: 'Artisanal Jam',
+                weight: '9 oz Jar',
+                price: 11.50,
+                badge: 'Board Pairing',
+                description: 'Bright, tart-sweet Vermont red raspberries simmered in copper kettles to cut through rich brie and smoked cheddar.',
+                image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=700&q=80'
+            },
+            {
+                id: 'spiced-apple-butter',
+                name: 'Orchard Spiced Apple & Cider Jam',
+                category: 'pantry',
+                categoryLabel: 'Artisanal Jam',
+                weight: '9 oz Jar',
+                price: 11.00,
+                badge: 'Autumn Harvest',
+                description: 'Slow-cooked Honeycrisp apples, boiled cider, and warm cinnamon—crafted for grilled cheddar sandwiches.',
+                image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=700&q=80'
+            }
+        ];
+
+        // 3. CURATED RECIPES DATA (With linked shoppable product IDs)
+        const RECIPES = [
+            {
+                id: 'smoked-cheddar-apple-melt',
+                title: 'Smoked Cheddar & Spiced Apple Grilled Cheese',
+                prepTime: '15 mins',
+                servings: '2 Sandwiches',
+                difficulty: 'Easy',
+                image: 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=900&q=80',
+                summary: 'Crisp country sourdough layered with melted 1873 Hickory Smoked Cheddar, Orchard Spiced Apple Jam, and thin Honeycrisp slices.',
+                featuredProductIds: ['smoked-cheddar', 'spiced-apple-butter'],
+                ingredients: [
+                    { text: '4 oz Founders\' Dairy 1873 Hickory Smoked Cheddar, thickly sliced', productId: 'smoked-cheddar' },
+                    { text: '2 tbsp Founders\' Dairy Orchard Spiced Apple & Cider Jam', productId: 'spiced-apple-butter' },
+                    { text: '4 slices rustic sourdough bread', productId: null },
+                    { text: '1/2 Honeycrisp apple, thinly sliced', productId: null },
+                    { text: '2 tbsp salted Vermont butter, softened', productId: null }
+                ],
+                steps: [
+                    'Spread the interior of two sourdough slices generously with Orchard Spiced Apple & Cider Jam.',
+                    'Layer half of the 1873 Hickory Smoked Cheddar, crisp apple slices, and the remaining smoked cheddar on top.',
+                    'Butter the exterior of the bread slices and toast in a cast-iron skillet over medium-low heat for 3–4 minutes per side until deeply golden and molten.',
+                    'Slice diagonally and serve warm with extra apple jam for dipping.'
+                ]
+            },
+            {
+                id: 'maple-baked-brie-crostini',
+                title: 'Maple-Glazed Baked Brie & Raspberry Jam Crostini',
+                prepTime: '20 mins',
+                servings: '6–8 Guests',
+                difficulty: 'Easy',
+                image: 'https://images.unsplash.com/photo-1452195100486-9cc805987862?auto=format&fit=crop&w=900&q=80',
+                summary: 'Warm Champlain Valley Triple-Cream Brie crowned with toasted pecans, pure Vermont amber maple syrup, and ruby raspberry jam.',
+                featuredProductIds: ['triple-cream-brie', 'maple-syrup', 'raspberry-jam'],
+                ingredients: [
+                    { text: '1 wheel (9 oz) Founders\' Dairy Champlain Valley Triple-Cream Brie', productId: 'triple-cream-brie' },
+                    { text: '3 tbsp Founders\' Dairy Wood-Fired Amber Maple Syrup', productId: 'maple-syrup' },
+                    { text: '3 tbsp Founders\' Dairy Heirloom Red Raspberry Cheese Jam', productId: 'raspberry-jam' },
+                    { text: '1/3 cup toasted pecans & fresh thyme sprigs', productId: null },
+                    { text: '1 crusty French baguette, sliced into 1/2-inch crostini', productId: null }
+                ],
+                steps: [
+                    'Preheat oven to 375°F (190°C) and place the Triple-Cream Brie in a small parchment-lined baker.',
+                    'Score the top rind gently in a diamond pattern and bake for 12–14 minutes until soft and oozy in the center.',
+                    'Spoon Heirloom Red Raspberry Cheese Jam over the warm wheel, drizzle generously with Wood-Fired Amber Maple Syrup, and scatter with toasted pecans and thyme.',
+                    'Serve immediately alongside warm toasted baguette crostini.'
+                ]
+            },
+            {
+                id: 'sharp-cheddar-maple-fondue',
+                title: 'Vermont Sharp Cheddar & Maple Beer Fondue',
+                prepTime: '20 mins',
+                servings: '4–6 Servings',
+                difficulty: 'Easy',
+                image: 'https://images.unsplash.com/photo-1624806992066-5ffcf7ca186b?auto=format&fit=crop&w=900&q=80',
+                summary: 'Velvety fondue blending 2-Year Cave-Aged Sharp Cheddar, Green Mountain Reserve Alpine, local amber ale, and a hint of maple.',
+                featuredProductIds: ['sharp-cheddar', 'reserve-alpine', 'maple-syrup'],
+                ingredients: [
+                    { text: '8 oz Founders\' Dairy 2-Year Cave-Aged Sharp Cheddar, freshly grated', productId: 'sharp-cheddar' },
+                    { text: '4 oz Founders\' Dairy Green Mountain Reserve Alpine, grated', productId: 'reserve-alpine' },
+                    { text: '1 tbsp Founders\' Dairy Wood-Fired Amber Maple Syrup', productId: 'maple-syrup' },
+                    { text: '3/4 cup Vermont amber ale or dry apple cider', productId: null },
+                    { text: '1 tbsp cornstarch + 1 tsp Dijon mustard', productId: null }
+                ],
+                steps: [
+                    'Toss the grated Sharp Cheddar and Reserve Alpine cheeses with cornstarch in a medium bowl to ensure a silky emulsion.',
+                    'Bring the Vermont amber ale to a gentle simmer in a heavy-bottomed saucepan over medium-low heat.',
+                    'Whisk in the cheeses a handful at a time until completely melted and smooth, then stir in Dijon mustard and Wood-Fired Amber Maple Syrup.',
+                    'Transfer to a warm fondue pot and serve with cubed crusty bread, roasted baby potatoes, and crisp apples.'
+                ]
+            }
+        ];
+
+        // 4. APPLICATION STATE
+        let currentRoute = 'home';
+        let currentFilter = 'all';
+        let cart = []; // Array of { productId, qty }
+
+        // 5. NAVIGATION & DYNAMIC SEO METADATA UPDATER
+        function navigateTo(route, filterCategory = null) {
+            if (!SEO_DATA[route]) return;
+            currentRoute = route;
+
+            // Update Document <title> and <meta name="description"> dynamically
+            const seo = SEO_DATA[route];
+            document.title = seo.title;
+            const metaDescTag = document.getElementById('meta-description');
+            if (metaDescTag) {
+                metaDescTag.setAttribute('content', seo.description);
+            }
+
+            // Toggle Views
+            document.querySelectorAll('.page-view').forEach(el => el.classList.add('hidden'));
+            const activeView = document.getElementById(`view-${route}`);
+            if (activeView) {
+                activeView.classList.remove('hidden');
+            }
+
+            // Update Desktop & Mobile Nav Active Styles
+            document.querySelectorAll('.nav-tab').forEach(btn => {
+                btn.classList.remove('bg-forest-900', 'text-parchment-50', 'shadow-xs');
+                btn.classList.add('text-forest-900', 'hover:bg-parchment-200/70');
+            });
+            const activeNav = document.getElementById(`nav-${route}`);
+            if (activeNav) {
+                activeNav.classList.add('bg-forest-900', 'text-parchment-50', 'shadow-xs');
+                activeNav.classList.remove('text-forest-900', 'hover:bg-parchment-200/70');
+            }
+
+            document.querySelectorAll('.m-nav-tab').forEach(btn => {
+                btn.classList.remove('bg-forest-900', 'text-parchment-50');
+                btn.classList.add('bg-parchment-100', 'text-forest-900');
+            });
+            const activeMobileNav = document.getElementById(`m-nav-${route}`);
+            if (activeMobileNav) {
+                activeMobileNav.classList.add('bg-forest-900', 'text-parchment-50');
+                activeMobileNav.classList.remove('bg-parchment-100', 'text-forest-900');
+            }
+
+            // Apply optional category filter if navigating to cheeses
+            if (route === 'cheeses' && filterCategory) {
+                filterProducts(filterCategory);
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 6. RENDER PRODUCTS & FILTERING
+        function filterProducts(category) {
+            currentFilter = category;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                if (btn.dataset.filter === category) {
+                    btn.classList.add('bg-forest-900', 'text-parchment-50');
+                    btn.classList.remove('bg-white', 'text-forest-900', 'border', 'border-parchment-300');
+                } else {
+                    btn.classList.remove('bg-forest-900', 'text-parchment-50');
+                    btn.classList.add('bg-white', 'text-forest-900', 'border', 'border-parchment-300');
+                }
+            });
+            renderProducts();
+        }
+
+        function renderProducts() {
+            const grid = document.getElementById('product-grid');
+            if (!grid) return;
+
+            const filtered = currentFilter === 'all' 
+                ? PRODUCTS 
+                : PRODUCTS.filter(p => p.category === currentFilter);
+
+            grid.innerHTML = filtered.map(product => `
+                <article class="bg-white rounded-3xl border border-parchment-200 overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between group">
+                    <div>
+                        <div class="relative h-52 bg-parchment-100 overflow-hidden">
+                            <img src="${product.image}" 
+                                 alt="${product.name}" 
+                                 onerror="this.src='https://placehold.co/600x450/EDE5D5/163025?text=${encodeURIComponent(product.name)}'"
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-forest-950/90 text-cheddar-400 text-[11px] font-semibold tracking-wide">
+                                ${product.badge}
+                            </span>
+                        </div>
+                        <div class="p-5">
+                            <div class="flex items-center justify-between text-xs text-cheddar-700 font-semibold uppercase tracking-wider">
+                                <span>${product.categoryLabel}</span>
+                                <span class="text-charcoal/50 font-normal normal-case">${product.weight}</span>
+                            </div>
+                            <h2 class="font-serif text-xl font-bold text-forest-950 mt-1.5 leading-snug">${product.name}</h2>
+                            <p class="text-xs sm:text-sm text-charcoal/75 mt-2 leading-relaxed">${product.description}</p>
+                        </div>
+                    </div>
+                    <div class="px-5 pb-5 pt-3 border-t border-parchment-100 flex items-center justify-between gap-3">
+                        <span class="font-serif text-xl font-bold text-forest-900">$${product.price.toFixed(2)}</span>
+                        <button onclick="addToCart('${product.id}')" class="px-4 py-2.5 rounded-full bg-forest-900 hover:bg-cheddar-500 text-parchment-50 hover:text-forest-950 text-xs font-semibold transition-colors active:scale-95">
+                            + Add to Basket
+                        </button>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        // 7. RENDER RECIPES & RECIPE MODAL
+        function renderRecipes() {
+            const grid = document.getElementById('recipes-grid');
+            if (!grid) return;
+
+            grid.innerHTML = RECIPES.map(recipe => {
+                const linkedProducts = recipe.featuredProductIds
+                    .map(id => PRODUCTS.find(p => p.id === id))
+                    .filter(Boolean);
+
+                return `
+                <article class="bg-white rounded-3xl border border-parchment-200 overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-56 bg-parchment-100 overflow-hidden cursor-pointer" onclick="openRecipeModal('${recipe.id}')">
+                            <img src="${recipe.image}" 
+                                 alt="${recipe.title}" 
+                                 onerror="this.src='https://placehold.co/800x500/163025/E2A642?text=${encodeURIComponent(recipe.title)}'"
+                                 class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                            <div class="absolute bottom-3 left-3 flex items-center gap-2">
+                                <span class="px-3 py-1 rounded-full bg-forest-950/90 text-parchment-50 text-xs font-medium">${recipe.prepTime}</span>
+                                <span class="px-3 py-1 rounded-full bg-cheddar-500 text-forest-950 text-xs font-bold">${recipe.difficulty}</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h2 onclick="openRecipeModal('${recipe.id}')" class="font-serif text-2xl font-bold text-forest-950 hover:text-cheddar-700 cursor-pointer leading-snug transition-colors">
+                                ${recipe.title}
+                            </h2>
+                            <p class="text-sm text-charcoal/80 mt-2.5 leading-relaxed">${recipe.summary}</p>
+
+                            <!-- Featured Founders' Dairy Ingredients Chips -->
+                            <div class="mt-5 pt-4 border-t border-parchment-200">
+                                <span class="text-[11px] font-bold uppercase tracking-wider text-forest-800 block mb-2">Founders' Dairy Ingredients:</span>
+                                <div class="flex flex-wrap gap-1.5">
+                                    ${linkedProducts.map(p => `
+                                        <span class="inline-flex items-center px-2.5 py-1 rounded-lg bg-parchment-100 text-forest-900 text-xs font-medium border border-parchment-200">
+                                            ${p.name}
+                                        </span>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="px-6 pb-6 pt-2 flex flex-col sm:flex-row gap-2.5">
+                        <button onclick="openRecipeModal('${recipe.id}')" class="flex-1 py-2.5 px-4 rounded-full bg-parchment-100 hover:bg-parchment-200 text-forest-950 font-semibold text-xs transition-colors">
+                            View Full Recipe
+                        </button>
+                        <button onclick="shopRecipeIngredients('${recipe.id}')" class="flex-1 py-2.5 px-4 rounded-full bg-forest-900 hover:bg-cheddar-500 text-parchment-50 hover:text-forest-950 font-semibold text-xs transition-colors">
+                            Shop the Ingredients (${linkedProducts.length})
+                        </button>
+                    </div>
+                </article>
+                `;
+            }).join('');
+        }
+
+        function openRecipeModal(recipeId) {
+            const recipe = RECIPES.find(r => r.id === recipeId);
+            if (!recipe) return;
+
+            const linkedProducts = recipe.featuredProductIds
+                .map(id => PRODUCTS.find(p => p.id === id))
+                .filter(Boolean);
+
+            const modalContent = document.getElementById('recipe-modal-content');
+            modalContent.innerHTML = `
+                <div class="relative h-64 sm:h-72 bg-forest-950">
+                    <img src="${recipe.image}" alt="${recipe.title}" class="w-full h-full object-cover opacity-90">
+                    <button onclick="closeRecipeModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-forest-950/80 hover:bg-forest-950 text-white flex items-center justify-center transition-colors" aria-label="Close recipe">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                    <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-forest-950 via-forest-950/70 to-transparent p-6 sm:p-8">
+                        <div class="flex items-center gap-3 text-xs text-cheddar-400 font-semibold uppercase tracking-wider mb-1">
+                            <span>${recipe.prepTime}</span>
+                            <span>•</span>
+                            <span>${recipe.servings}</span>
+                        </div>
+                        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-parchment-50">${recipe.title}</h2>
+                    </div>
+                </div>
+
+                <div class="p-6 sm:p-8 space-y-6 max-h-[65vh] overflow-y-auto">
+                    <p class="text-sm sm:text-base text-charcoal/85 leading-relaxed">${recipe.summary}</p>
+
+                    <!-- Shop the Ingredients Callout Box -->
+                    <div class="bg-parchment-100 rounded-2xl p-5 border border-parchment-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-wider text-cheddar-700">Creamery-to-Kitchen</span>
+                            <h3 class="font-serif text-lg font-bold text-forest-950">Shop the Founders' Dairy Ingredients</h3>
+                            <p class="text-xs text-charcoal/75 mt-0.5">Add all ${linkedProducts.length} featured Vermont items straight to your basket.</p>
+                        </div>
+                        <button onclick="shopRecipeIngredients('${recipe.id}'); closeRecipeModal();" class="shrink-0 px-5 py-3 rounded-full bg-forest-900 hover:bg-cheddar-500 text-parchment-50 hover:text-forest-950 font-semibold text-xs transition-colors">
+                            Add All Ingredients to Basket
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+                        <!-- Ingredients Checklist -->
+                        <div class="md:col-span-5 space-y-3">
+                            <h3 class="font-serif text-xl font-bold text-forest-950 border-b border-parchment-200 pb-2">Ingredients</h3>
+                            <ul class="space-y-2.5">
+                                ${recipe.ingredients.map(ing => `
+                                    <li class="flex items-start gap-2.5 text-sm">
+                                        <input type="checkbox" class="mt-1 rounded border-parchment-300 text-forest-900 focus:ring-cheddar-500">
+                                        <div class="flex-1">
+                                            <span class="${ing.productId ? 'font-semibold text-forest-950' : 'text-charcoal/85'}">${ing.text}</span>
+                                            ${ing.productId ? `
+                                                <button onclick="addToCart('${ing.productId}')" class="block text-[11px] font-semibold text-cheddar-700 hover:underline mt-0.5">
+                                                    + Add item to basket
+                                                </button>
+                                            ` : ''}
+                                        </div>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+
+                        <!-- Preparation Instructions -->
+                        <div class="md:col-span-7 space-y-3">
+                            <h3 class="font-serif text-xl font-bold text-forest-950 border-b border-parchment-200 pb-2">Preparation</h3>
+                            <ol class="space-y-4">
+                                ${recipe.steps.map((step, idx) => `
+                                    <li class="flex gap-3 text-sm leading-relaxed text-charcoal/90">
+                                        <span class="w-6 h-6 rounded-full bg-forest-900 text-cheddar-400 font-serif font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">
+                                            ${idx + 1}
+                                        </span>
+                                        <span>${step}</span>
+                                    </li>
+                                `).join('')}
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('recipe-modal').classList.remove('hidden');
+        }
+
+        function closeRecipeModal() {
+            document.getElementById('recipe-modal').classList.add('hidden');
+        }
+
+        function shopRecipeIngredients(recipeId) {
+            const recipe = RECIPES.find(r => r.id === recipeId);
+            if (!recipe) return;
+
+            recipe.featuredProductIds.forEach(prodId => {
+                addToCart(prodId, false);
+            });
+            showToast(`Added ${recipe.featuredProductIds.length} ingredients for "${recipe.title}" to your basket!`);
+            toggleCart(true);
+        }
+
+        // 8. SHOPPING CART LOGIC
+        function addToCart(productId, notify = true) {
+            const product = PRODUCTS.find(p => p.id === productId);
+            if (!product) return;
+
+            const existing = cart.find(item => item.productId === productId);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({ productId, qty: 1 });
+            }
+
+            updateCartUI();
+            if (notify) {
+                showToast(`Added ${product.name} to your basket.`);
+            }
+        }
+
+        function updateCartQty(productId, delta) {
+            const index = cart.findIndex(item => item.productId === productId);
+            if (index === -1) return;
+
+            cart[index].qty += delta;
+            if (cart[index].qty <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            document.getElementById('cart-badge').textContent = totalItems;
+
+            const container = document.getElementById('cart-items-container');
+            const checkoutBtn = document.getElementById('checkout-btn');
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 space-y-3">
+                        <div class="w-14 h-14 rounded-full bg-parchment-100 text-forest-800 mx-auto flex items-center justify-center">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                            </svg>
+                        </div>
+                        <p class="font-serif text-lg font-bold text-forest-950">Your creamery basket is empty</p>
+                        <p class="text-xs text-charcoal/70 max-w-xs mx-auto">Explore our smoked cheddars, maple syrup, and jams—or add ingredients straight from a recipe.</p>
+                        <button onclick="toggleCart(false); navigateTo('cheeses');" class="mt-2 px-5 py-2.5 rounded-full bg-forest-900 text-parchment-50 text-xs font-semibold">
+                            Shop Cheeses &amp; Pantry
+                        </button>
+                    </div>
+                `;
+                checkoutBtn.disabled = true;
+            } else {
+                checkoutBtn.disabled = false;
+                container.innerHTML = cart.map(item => {
+                    const p = PRODUCTS.find(prod => prod.id === item.productId);
+                    if (!p) return '';
+                    return `
+                        <div class="flex items-center gap-3.5 bg-white p-3.5 rounded-2xl border border-parchment-200">
+                            <img src="${p.image}" alt="${p.name}" class="w-16 h-16 rounded-xl object-cover bg-parchment-100 shrink-0">
+                            <div class="flex-1 min-w-0">
+                                <h4 class="font-serif text-sm font-bold text-forest-950 truncate">${p.name}</h4>
+                                <p class="text-xs text-charcoal/60">${p.weight}</p>
+                                <p class="text-sm font-bold text-forest-900 mt-1">$${(p.price * item.qty).toFixed(2)}</p>
+                            </div>
+                            <div class="flex items-center gap-2 bg-parchment-100 rounded-full px-2 py-1 border border-parchment-200">
+                                <button onclick="updateCartQty('${p.id}', -1)" class="w-6 h-6 rounded-full hover:bg-white text-forest-950 font-bold text-xs flex items-center justify-center">-</button>
+                                <span class="text-xs font-bold w-4 text-center">${item.qty}</span>
+                                <button onclick="updateCartQty('${p.id}', 1)" class="w-6 h-6 rounded-full hover:bg-white text-forest-950 font-bold text-xs flex items-center justify-center">+</button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            // Calculate Subtotal & Free Shipping Threshold ($75)
+            const subtotal = cart.reduce((sum, item) => {
+                const p = PRODUCTS.find(prod => prod.id === item.productId);
+                return sum + (p ? p.price * item.qty : 0);
+            }, 0);
+
+            const freeShipThreshold = 75;
+            const shippingCost = subtotal === 0 ? 0 : (subtotal >= freeShipThreshold ? 0 : 9.95);
+            const total = subtotal + shippingCost;
+
+            document.getElementById('cart-subtotal').textContent = `$${subtotal.toFixed(2)}`;
+            document.getElementById('cart-shipping').textContent = subtotal === 0 ? '$0.00' : (shippingCost === 0 ? 'FREE' : `$${shippingCost.toFixed(2)}`);
+            document.getElementById('cart-total').textContent = `$${total.toFixed(2)}`;
+
+            const progressPct = Math.min(100, (subtotal / freeShipThreshold) * 100);
+            document.getElementById('shipping-progress-bar').style.width = `${progressPct}%`;
+
+            const statusText = document.getElementById('shipping-status-text');
+            if (subtotal >= freeShipThreshold) {
+                statusText.textContent = "🎉 You've unlocked FREE Nationwide Cold-Pack Shipping!";
+            } else {
+                const remaining = (freeShipThreshold - subtotal).toFixed(2);
+                statusText.textContent = `Add $${remaining} more for Free Nationwide Cold-Pack Shipping`;
+            }
+        }
+
+        function toggleCart(open) {
+            const drawer = document.getElementById('cart-drawer');
+            if (open) {
+                drawer.classList.remove('hidden');
+            } else {
+                drawer.classList.add('hidden');
+            }
+        }
+
+        function handleCheckout() {
+            if (cart.length === 0) return;
+            cart = [];
+            updateCartUI();
+            toggleCart(false);
+            showToast("Thank you! Your Vermont cold-pack order has been received.");
+        }
+
+        // 9. TOAST NOTIFICATIONS (Non-blocking alternative to alert)
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'pointer-events-auto bg-forest-950 text-parchment-50 px-4 py-3 rounded-2xl shadow-xl border border-cheddar-400/40 text-xs sm:text-sm font-medium flex items-center justify-between gap-3 transition-all duration-300';
+            toast.innerHTML = `
+                <div class="flex items-center gap-2.5">
+                    <span class="w-2 h-2 rounded-full bg-cheddar-400 shrink-0"></span>
+                    <span>${message}</span>
+                </div>
+            `;
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3200);
+        }
+
+        // INITIALIZE ON LOAD
+        window.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            renderRecipes();
+            updateCartUI();
+            navigateTo('home');
+        });
+    </script>
+</body>
+</html>
